@@ -1,1 +1,0 @@
-Use this for Assignment 3 (source code of the final, 'integrated' project)
