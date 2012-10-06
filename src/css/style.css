@@ -1,0 +1,72 @@
+body {
+	background: url('../images/Sternrekorder.jpg');
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	display: block;
+}
+
+#background {
+	background: url('../images/MIDI-body.png') no-repeat center;
+	width: 940px;
+	height: 738px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -369px;
+	margin-left: -470px;
+}
+
+#container {
+	background-color: #456;
+	width: 800px;
+	height: 600px;
+	color: #fff;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -300px;
+	margin-left: -400px;
+}
+
+#header {
+	background-color: #b8ff47;
+	height: 100px;
+}
+
+#left-column {
+	float: left;
+	width: 350px;
+	min-height: 500px;
+}
+
+#left-column #selector {
+	background-color: #95c4ff;
+	min-height: 300px;
+}
+
+#left-column #vis {
+	background-color: #47abff;
+	min-height: 200px;
+}
+
+#right-column {
+	float: right;
+	width: 450px;
+	min-height: 500px;
+}
+
+#right-column #pads {
+	background-color: #27983a;
+	min-height: 450px;
+}
+
+#right-column #player {
+	background-color: #c9d69c;
+	min-height: 50px;
+}
+
+#header, #left-column > div, #right-column > div {
+	overflow: hidden;
+}
