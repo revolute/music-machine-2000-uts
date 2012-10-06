@@ -3,25 +3,51 @@ window.onload = init;
 var context;
 var source;
 
+var bufferedSounds = new BufferedSounds();
+
+function BufferedSounds() {
+	var sounds = new Array();
+	this.getSound = function (id) {
+		return sounds[id];
+	}
+	
+	this.addSound = function (param) {
+		if (typeof sounds == 'undefined')
+		{
+			Console.log("its unbelievable");
+		}
+		sounds.push(param);
+	}
+}
+
 function loadSample(url) {
+	var sound;
     var request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.responseType = "arraybuffer";
 
     request.onload = function() {
-      source.buffer = context.createBuffer(request.response, false);
-	  source.connect(context.destination);
-      source.looping = true;
-      source.noteOn(0);
+      sound = context.createBuffer(request.response, false);
+	  bufferedSounds.addSound(sound);
     }
-
     request.send();
+}
+
+function playSample(sound) {
+	var source = context.createBufferSource(); // creates a sound source
+	source.buffer = sound;                    // tell the source which sound to play
+	source.connect(context.destination);       // connect the source to the context's destination (the speakers)
+	source.noteOn(0);                          // play the source now
 }
 
 function init()
 {
     context = new webkitAudioContext();
-    source = context.createBufferSource();
 
+    source = context.createBufferSource();
     loadSample("./sounds/test/samples/syntklocka_stab_1.ogg");
+	loadSample("./sounds/test/samples/syntklocka_stab_2.ogg");
+	loadSample("./sounds/test/samples/syntklocka_stab_3.ogg");
+	loadSample("./sounds/test/samples/syntklocka_stab_4.ogg");
+	loadSample("./sounds/test/samples/syntklocka_stab_5.ogg");
 }
