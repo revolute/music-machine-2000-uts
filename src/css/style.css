@@ -1,0 +1,60 @@
+body {
+	background: url('Sternrekorder.jpg');
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	display: block;
+}
+
+#background {
+	background-color: #123;
+	width: 1000px;
+	height: 800px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -400px;
+	margin-left: -500px;
+}
+
+#container {
+	background-color: #456;
+	width: 800px;
+	height: 600px;
+	color: #fff;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -300px;
+	margin-left: -400px;
+}
+
+#header {
+	background-color: #b8ff47;
+	height: 100px;
+}
+
+#content {
+	float: left;
+	width: 800px;
+}
+
+#content #left-column {
+	float: left;
+	background-color: #47abff;
+	width: 350px;
+	min-height: 450px;
+}
+
+#content #right-column {
+	float: right;
+	background-color: #ffb0b0;
+	width: 450px;
+	min-height: 450px;
+}
+
+#footer {
+	clear: both;
+	background-color: #789;
+}
