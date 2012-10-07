@@ -2,10 +2,10 @@ window.onload = init;
 
 var context;
 var source;
+var soundboard = new Soundboard();
+var keyMappings = new KeyMappings();
 
-var bufferedSounds = new BufferedSounds();
-
-function BufferedSounds() {
+function Soundboard() {
 	var sounds = new Array();
 	this.getSound = function (id) {
 		return sounds[id];
@@ -20,6 +20,18 @@ function BufferedSounds() {
 	}
 }
 
+function KeyMappings() {
+	Mousetrap.bind('a', function(e) {
+		playSample(soundboard.getSound(0));
+	});
+	Mousetrap.bind('s', function(e) {
+		playSample(soundboard.getSound(1));
+	});
+	Mousetrap.bind('d', function(e) {
+		playSample(soundboard.getSound(2));
+	});
+}
+
 function loadSample(url) {
 	var sound;
     var request = new XMLHttpRequest();
@@ -28,7 +40,7 @@ function loadSample(url) {
 
     request.onload = function() {
       sound = context.createBuffer(request.response, false);
-	  bufferedSounds.addSound(sound);
+	  soundboard.addSound(sound);
     }
     request.send();
 }
@@ -40,10 +52,8 @@ function playSample(sound) {
 	source.noteOn(0);                          // play the source now
 }
 
-function init()
-{
+function init() {
     context = new webkitAudioContext();
-
     source = context.createBufferSource();
     loadSample("./sounds/test/samples/syntklocka_stab_1.ogg");
 	loadSample("./sounds/test/samples/syntklocka_stab_2.ogg");
