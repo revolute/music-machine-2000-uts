@@ -20,18 +20,6 @@ function Soundboard() {
 	}
 }
 
-function KeyMappings() {
-	Mousetrap.bind('a', function(e) {
-		playSample(soundboard.getSound(0));
-	});
-	Mousetrap.bind('s', function(e) {
-		playSample(soundboard.getSound(1));
-	});
-	Mousetrap.bind('d', function(e) {
-		playSample(soundboard.getSound(2));
-	});
-}
-
 function loadSample(url) {
 	var sound;
     var request = new XMLHttpRequest();
@@ -60,4 +48,16 @@ function init() {
 	loadSample("./sounds/test/samples/syntklocka_stab_3.ogg");
 	loadSample("./sounds/test/samples/syntklocka_stab_4.ogg");
 	loadSample("./sounds/test/samples/syntklocka_stab_5.ogg");
+}
+
+function KeyMappings() {
+	Mousetrap.bind('a', function(e) {
+		playSample(soundboard.getSound(0));
+	});
+	Mousetrap.bind('s', function(e) {
+		playSample(soundboard.getSound(1));
+	});
+	Mousetrap.bind('d', function(e) {
+		playSample(soundboard.getSound(2));
+	});
 }
