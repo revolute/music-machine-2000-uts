@@ -24,8 +24,13 @@ button.skip {
   text-decoration: none;
   text-align: center;
   text-shadow: 0 -1px 1px #000f4d;
-  width: 150px; }
-  button.skip:hover {
+  width: 150px;
+  min-height: 100px;
+  transition: all 0.8s ease;
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -o-transition: all 0.1s ease; }
+  button.skip:hover, button.active {
     background-color: #7f8dad;
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7f8dad), color-stop(50%, #4a5e8c), color-stop(50%, #2f477d), color-stop(100%, #364c80));
     background-image: -webkit-linear-gradient(top, #7f8dad 0%, #4a5e8c 50%, #2f477d 50%, #364c80 100%);
@@ -42,10 +47,10 @@ button.skip {
 
 <body>
 <button id="cool" class="skip" onclick="playSample(soundboard.getSound(0));">Load and Play 1!</button>
-<button id="cool" class="skip" onclick="playSample(soundboard.getSound(1));">Load and Play 2!</button>
-<button id="cool" class="skip" onclick="playSample(soundboard.getSound(2));">Load and Play 3!</button>
-<button id="cool" class="skip" onclick="playSample(soundboard.getSound(3));">Load and Play 4!</button>
-<button id="cool" class="skip" onclick="playSample(soundboard.getSound(4));">Load and Play 5!</button>
+<button id="cool2" class="skip" onclick="playSample(soundboard.getSound(1));">Load and Play 2!</button>
+<button id="cool3" class="skip" onclick="playSample(soundboard.getSound(2));">Load and Play 3!</button>
+<button id="cool4" class="skip" onclick="playSample(soundboard.getSound(3));">Load and Play 4!</button>
+<button id="cool5" class="skip" onclick="playSample(soundboard.getSound(4));">Load and Play 5!</button>
 </body>
 
 </html>

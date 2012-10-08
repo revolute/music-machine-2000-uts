@@ -23,17 +23,25 @@ function Soundboard() {
 function KeyMappings() {
 	Mousetrap.bind('a', function(e) {
 		simulate(document.getElementById("cool"), "click");
-		document.getElementById("cool").classList.toggle("active");
+		document.getElementById("cool").classList.add("active");
 	}, 'keydown');
 	Mousetrap.bind('a', function(e) {
-		document.getElementById("cool").classList.toggle("active");
+		document.getElementById("cool").classList.remove("active");
 	}, 'keyup');
 	Mousetrap.bind('s', function(e) {
-		playSample(soundboard.getSound(1));
-	});
+		simulate(document.getElementById("cool2"), "click");
+		document.getElementById("cool2").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('s', function(e) {
+		document.getElementById("cool2").classList.toggle("active");
+	}, 'keyup');
 	Mousetrap.bind('d', function(e) {
-		playSample(soundboard.getSound(2));
-	});
+		simulate(document.getElementById("cool3"), "click");
+		document.getElementById("cool3").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('d', function(e) {
+		document.getElementById("cool3").classList.toggle("active");
+	}, 'keyup');
 }
 
 function loadSample(url) {
@@ -66,6 +74,7 @@ function init() {
 	loadSample("./sounds/test/samples/syntklocka_stab_5.ogg");
 }
 
+// credit for mouse simulation code: http://stackoverflow.com/a/6158050
  function simulate(element, eventName)
     {
         var options = extend(defaultOptions, arguments[2] || {});
