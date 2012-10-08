@@ -19,7 +19,6 @@ body {
 }
 
 #container {
-	background-color: #456;
 	width: 800px;
 	height: 600px;
 	color: #fff;
@@ -31,8 +30,12 @@ body {
 }
 
 #header {
-	background-color: #b8ff47;
+	background: url('../images/top-header.png') no-repeat center;
 	height: 100px;
+}
+
+#header img {
+	padding: 20px;
 }
 
 #left-column {
@@ -42,7 +45,6 @@ body {
 }
 
 #left-column #selector {
-	background-color: #95c4ff;
 	min-height: 300px;
 }
 
@@ -70,3 +72,10 @@ body {
 #header, #left-column > div, #right-column > div {
 	overflow: hidden;
 }
+
+img.section-title {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
