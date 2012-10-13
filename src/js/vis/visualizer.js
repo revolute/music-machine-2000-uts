@@ -32,24 +32,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 var context;
 var source = 0;
 var jsProcessor = 0;
-/*
-function initAudio() {
-    context = new webkitAudioContext();
-    source = context.createBufferSource();
-    source = context.createBufferSource();
-
-    // This AudioNode will do the amplitude modulation effect directly in JavaScript
-    jsProcessor = context.createJavaScriptNode(2048);
-    jsProcessor.onaudioprocess = audioAvailable;			// run jsfft audio frame event
-    
-    // Connect the processing graph: source -> jsProcessor -> analyser -> destination
-    source.connect(jsProcessor);
-    jsProcessor.connect(context.destination);
-
-    // Load the sample buffer for the audio source
-    loadSample("song.ogg");
-}
-*/
 
 var theme = ["rgba(255, 255, 255,","rgba(240, 240, 240,","rgba(210, 210, 210,","rgba(180, 180, 180,","rgba(150, 150, 150,","rgba(120, 120, 150,","rgba(90, 90, 150,","rgba(60, 60, 180,","rgba(30, 30, 180,","rgba(0, 0, 200,","rgba(0, 0, 210,","rgba(0, 0, 220,","rgba(0, 0, 230,","rgba(0, 0, 240,","rgba(0, 0, 255,","rgba(0, 30, 255,","rgba(0, 60, 255,","rgba(0, 90, 255,","rgba(0, 120, 255,","rgba(0, 150, 255,"];
 

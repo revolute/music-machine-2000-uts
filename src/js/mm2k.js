@@ -4,6 +4,7 @@ var keyMappings;
 var context;
 var outputNode;
 var source;
+var backingSsource;
 var manager;
 var activeSoundboard;
 var jsProcessor;
@@ -12,6 +13,7 @@ function init() {
 	keyMappings = new KeyMappings();
     context = new webkitAudioContext();
     source = context.createBufferSource();
+	backingSource = context.createBufferSource();
 	activeSoundboard = new Soundboard();
 	manager = new SoundboardManager();	
 	
@@ -24,20 +26,19 @@ function init() {
 	
 	jsProcessor = context.createJavaScriptNode(2048);
     jsProcessor.onaudioprocess = audioAvailable;
-	initBackingAudio();
-}
-
-function initBackingAudio() {
-
-    // This AudioNode will do the amplitude modulation effect directly in JavaScript
-			// run jsfft audio frame event
-    
-    // Connect the processing graph: source -> jsProcessor -> analyser -> destination
-    source.connect(jsProcessor);
+	source.connect(jsProcessor);
+	backingSource.connect(jsProcessor);
     jsProcessor.connect(context.destination);
 
-    // Load the sample buffer for the audio source
+	visualizer();
+}
+
+function playBackingTrack() {
     loadBackingSample("./js/vis/song2.ogg");
+}
+
+function stopBackingTrack() {
+	backingSource.noteOff(0);
 }
 
 function loadBackingSample(url) {
@@ -47,13 +48,13 @@ function loadBackingSample(url) {
     request.open("GET", url, true);
     request.responseType = "arraybuffer";
 
-    request.onload = function() { 
-        source.buffer = context.createBuffer(request.response, false);
-        source.looping = true;
-        source.noteOn(0);
-		visualizer();				// run jsfft visualizer
+    request.onload = function() {
+		backingSource = context.createBufferSource();
+		backingSource.connect(jsProcessor);
+        backingSource.buffer = context.createBuffer(request.response, false);
+        backingSource.looping = true;
+        backingSource.noteOn(0);
     }
-
     request.send();
 }
 
