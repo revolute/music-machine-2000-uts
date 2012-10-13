@@ -48,6 +48,17 @@ body {
 	min-height: 300px;
 }
 
+#vis-container {
+	width: 330px;
+	height: 226px;
+	background: url('../images/visualiser-window.png');
+}
+
+#vis-container canvas {
+	background-color: #000;
+	margin: 12px 14px;
+}
+
 #left-column #selector {
 	background-color: #47abff;
 	min-height: 200px;
@@ -95,13 +106,19 @@ img.section-title {
 	padding: 0;
 }
 
+#selector ul li {
+	
+}
+
 #selector label {
-	background-color:#000;
+	background-image: url('../images/setting-button-off.png');
 	overflow:auto;
+	width: 170px;
+	height: 36px;
 }
 
 #selector label span {
-	
+	display: block;
 }
 
 #selector label input {

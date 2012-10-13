@@ -17,7 +17,9 @@
 			<div id="left-column">
 				<div id="vis">
 					<img class="section-title" src="images/visualiser-name-bar.png" alt="Visualiser">
-					<canvas id="fft" width="350" height="290"></canvas>
+					<div id="vis-container">
+						<canvas id="fft" width="300" height="200"></canvas>
+					</div>
 				</div>
 				<div id="selector">
 					<img class="section-title" src="images/settings-name-bar.png" alt="Settings">
@@ -32,10 +34,10 @@
 					<img class="section-title" src="images/trigger-pad-section-bar.png" alt="Trigger Pad Section">
 					<ul>
 						<li><button id="pad-1" class="skip" onclick="playSample(activeSoundboard.getSound(0));">Q</button></li>
-						<li><button id="pad-2" class="skip" onclick="playSample(activeSoundboard.getSound(0));">W</button></li>
-						<li><button id="pad-3" class="skip" onclick="playSample(activeSoundboard.getSound(0));">E</button></li>
-						<li><button id="pad-4" class="skip" onclick="playSample(activeSoundboard.getSound(0));">R</button></li>
-						<li><button id="pad-5" class="skip" onclick="playSample(activeSoundboard.getSound(0));">T</button></li>
+						<li><button id="pad-2" class="skip" onclick="playSample(activeSoundboard.getSound(1));">W</button></li>
+						<li><button id="pad-3" class="skip" onclick="playSample(activeSoundboard.getSound(2));">E</button></li>
+						<li><button id="pad-4" class="skip" onclick="playSample(activeSoundboard.getSound(3));">R</button></li>
+						<li><button id="pad-5" class="skip" onclick="playSample(activeSoundboard.getSound(4));">T</button></li>
 						<li><button id="pad-6" class="skip" onclick="playSample(activeSoundboard.getSound(0));">Y</button></li>
 						<li><button id="pad-7" class="skip" onclick="playSample(activeSoundboard.getSound(0));">U</button></li>
 						<li><button id="pad-8" class="skip" onclick="playSample(activeSoundboard.getSound(0));">I</button></li>
