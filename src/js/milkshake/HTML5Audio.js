@@ -2,26 +2,20 @@ var HTML5Audio = Class.extend({
 	init: function () {
 	    this.context = null;
 	    this.source = null;
-
-	    if (typeof webkitAudioContext != "undefined")
-		this.audioAPI = new WebkitHTML5Audio();
-	    else
-		this.audioAPI = new MozAudioAPI();
+		this.audioAPI = new WebkitAudioAPI();
 	}
     });
 
 var WebkitAudioAPI = Class.extend({
 
 	init: function() {
-	    
-		this.context = new webkitAudioContext();   
+		this.context = new webkitAudioContext();
 		this.source = context.createBufferSource();
 		this.processor = context.createJavaScriptNode(512);
 		this.processor.onaudioprocess = this.audioAvailable;
 		this.source.connect(processor);
 		this.processor.connect(context.destination);
 		this.loadSample("song.ogg");
-
 	},
 	
 	loadSample: function(url) {

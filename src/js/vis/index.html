@@ -1,0 +1,19 @@
+<html><head>
+	<title>HTML5 Web Audio API - Spectrum Visualizer</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+	<script language="JavaScript">
+
+		function init_page() {
+			initAudio();
+		}
+		window.onload = init_page;
+	</script>
+</head>
+
+<body>
+<div id="container">
+<div><canvas id="fft" width="1024" height="768"></canvas></div>
+<script src="visualizer.js"></script>
+</div>
+</body></html>

@@ -2,9 +2,11 @@ window.onload = init;
 
 var keyMappings;
 var context;
+var outputNode;
 var source;
 var manager;
 var activeSoundboard;
+var jsProcessor;
 
 function init() {
 	keyMappings = new KeyMappings();
@@ -12,12 +14,47 @@ function init() {
     source = context.createBufferSource();
 	activeSoundboard = new Soundboard();
 	manager = new SoundboardManager();	
+	
     loadSample("./sounds/test/samples/syntklocka_stab_1.ogg", "vibe");
 	loadSample("./sounds/test/samples/syntklocka_stab_2.ogg", "vibe");
 	loadSample("./sounds/test/samples/syntklocka_stab_3.ogg", "vibe");
 	loadSample("./sounds/test/samples/syntklocka_stab_4.ogg", "vibe");
 	loadSample("./sounds/test/samples/syntklocka_stab_5.ogg", "vibe");
 	manager.setActiveBoard("vibe");
+	
+	jsProcessor = context.createJavaScriptNode(2048);
+    jsProcessor.onaudioprocess = audioAvailable;
+	initBackingAudio();
+}
+
+function initBackingAudio() {
+
+    // This AudioNode will do the amplitude modulation effect directly in JavaScript
+			// run jsfft audio frame event
+    
+    // Connect the processing graph: source -> jsProcessor -> analyser -> destination
+    source.connect(jsProcessor);
+    jsProcessor.connect(context.destination);
+
+    // Load the sample buffer for the audio source
+    loadBackingSample("./js/vis/song2.ogg");
+}
+
+function loadBackingSample(url) {
+    // Load asynchronously
+
+    var request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.responseType = "arraybuffer";
+
+    request.onload = function() { 
+        source.buffer = context.createBuffer(request.response, false);
+        source.looping = true;
+        source.noteOn(0);
+		visualizer();				// run jsfft visualizer
+    }
+
+    request.send();
 }
 
 function SoundboardManager() {
@@ -75,8 +112,9 @@ function loadSample(url, soundboardID) {
 function playSample(sound) {
 	var source = context.createBufferSource(); // creates a sound source
 	try {
-		source.buffer = sound;                    // tell the source which sound to play
-		source.connect(context.destination);       // connect the source to the context's destination (the speakers)
+		source.buffer = sound;                  // tell the source which sound to play
+		source.connect(jsProcessor);
+		//source.connect(context.destination);       // connect the source to the context's destination (the speakers)
 		source.noteOn(0);                          // play the source now
 	} catch(error) {
 		console.log('The linked sound was not found! ' + error.message);

@@ -59,7 +59,7 @@ var milk = (function(){
 	try {
 	    initGL(function () {
 		    shaker = new Shaker();
-		    audio = new SoundCloudAudio();
+		    audio = new HTML5Audio();
 		    animationLoop();
 		    setInterval(function() {
 			    shaker.selectNext(true);
@@ -392,6 +392,7 @@ var milk = (function(){
     function uTexCoordPointer(size, type, stride, buf) {
 	gl.bindBuffer(gl.ARRAY_BUFFER, buf);
 	gl.vertexAttribPointer(texCoordPos, size, type, false, size*4, 0);
+	gl.enableVertexAttribArray(texCoordPos);
 	gl.enableVertexAttribArray(texCoordPos);
     }
 
