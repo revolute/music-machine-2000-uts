@@ -84,40 +84,117 @@ function playSample(sound) {
 }
 
 function KeyMappings() {
+	Mousetrap.bind('q', function(e) {
+		simulate(document.getElementById("pad-1"), "click");
+		document.getElementById("pad-1").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('q', function(e) {
+		document.getElementById("pad-1").classList.toggle("active");
+	}, 'keyup');
+	Mousetrap.bind('w', function(e) {
+		simulate(document.getElementById("pad-2"), "click");
+		document.getElementById("pad-2").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('w', function(e) {
+		document.getElementById("pad-2").classList.toggle("active");
+	}, 'keyup');
+	Mousetrap.bind('e', function(e) {
+		simulate(document.getElementById("pad-3"), "click");
+		document.getElementById("pad-3").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('e', function(e) {
+		document.getElementById("pad-3").classList.toggle("active");
+	}, 'keyup');
+	Mousetrap.bind('r', function(e) {
+		simulate(document.getElementById("pad-4"), "click");
+		document.getElementById("pad-4").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('r', function(e) {
+		document.getElementById("pad-4").classList.toggle("active");
+	}, 'keyup');
+	Mousetrap.bind('t', function(e) {
+		simulate(document.getElementById("pad-5"), "click");
+		document.getElementById("pad-5").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('t', function(e) {
+		document.getElementById("pad-5").classList.toggle("active");
+	}, 'keyup');
+	Mousetrap.bind('y', function(e) {
+		simulate(document.getElementById("pad-6"), "click");
+		document.getElementById("pad-6").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('y', function(e) {
+		document.getElementById("pad-6").classList.toggle("active");
+	}, 'keyup');
+	Mousetrap.bind('u', function(e) {
+		simulate(document.getElementById("pad-7"), "click");
+		document.getElementById("pad-7").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('u', function(e) {
+		document.getElementById("pad-7").classList.toggle("active");
+	}, 'keyup');
+	Mousetrap.bind('i', function(e) {
+		simulate(document.getElementById("pad-8"), "click");
+		document.getElementById("pad-8").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('i', function(e) {
+		document.getElementById("pad-8").classList.toggle("active");
+	}, 'keyup');
 	Mousetrap.bind('a', function(e) {
-		simulate(document.getElementById("cool"), "click");
-		document.getElementById("cool").classList.toggle("active");
+		simulate(document.getElementById("pad-9"), "click");
+		document.getElementById("pad-9").classList.toggle("active");
 	}, 'keydown');
 	Mousetrap.bind('a', function(e) {
-		document.getElementById("cool").classList.toggle("active");
+		document.getElementById("pad-9").classList.toggle("active");
 	}, 'keyup');
 	Mousetrap.bind('s', function(e) {
-		simulate(document.getElementById("cool2"), "click");
-		document.getElementById("cool2").classList.toggle("active");
+		simulate(document.getElementById("pad-10"), "click");
+		document.getElementById("pad-10").classList.toggle("active");
 	}, 'keydown');
 	Mousetrap.bind('s', function(e) {
-		document.getElementById("cool2").classList.toggle("active");
+		document.getElementById("pad-10").classList.toggle("active");
 	}, 'keyup');
 	Mousetrap.bind('d', function(e) {
-		simulate(document.getElementById("cool3"), "click");
-		document.getElementById("cool3").classList.toggle("active");
+		simulate(document.getElementById("pad-11"), "click");
+		document.getElementById("pad-11").classList.toggle("active");
 	}, 'keydown');
 	Mousetrap.bind('d', function(e) {
-		document.getElementById("cool3").classList.toggle("active");
+		document.getElementById("pad-11").classList.toggle("active");
 	}, 'keyup');
 	Mousetrap.bind('f', function(e) {
-		simulate(document.getElementById("cool4"), "click");
-		document.getElementById("cool4").classList.toggle("active");
+		simulate(document.getElementById("pad-12"), "click");
+		document.getElementById("pad-12").classList.toggle("active");
 	}, 'keydown');
 	Mousetrap.bind('f', function(e) {
-		document.getElementById("cool4").classList.toggle("active");
+		document.getElementById("pad-12").classList.toggle("active");
 	}, 'keyup');
 	Mousetrap.bind('g', function(e) {
-		simulate(document.getElementById("cool5"), "click");
-		document.getElementById("cool5").classList.toggle("active");
+		simulate(document.getElementById("pad-13"), "click");
+		document.getElementById("pad-13").classList.toggle("active");
 	}, 'keydown');
 	Mousetrap.bind('g', function(e) {
-		document.getElementById("cool5").classList.toggle("active");
+		document.getElementById("pad-13").classList.toggle("active");
+	}, 'keyup');
+	Mousetrap.bind('h', function(e) {
+		simulate(document.getElementById("pad-14"), "click");
+		document.getElementById("pad-14").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('h', function(e) {
+		document.getElementById("pad-14").classList.toggle("active");
+	}, 'keyup');
+	Mousetrap.bind('j', function(e) {
+		simulate(document.getElementById("pad-15"), "click");
+		document.getElementById("pad-15").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('j', function(e) {
+		document.getElementById("pad-15").classList.toggle("active");
+	}, 'keyup');
+	Mousetrap.bind('k', function(e) {
+		simulate(document.getElementById("pad-16"), "click");
+		document.getElementById("pad-16").classList.toggle("active");
+	}, 'keydown');
+	Mousetrap.bind('k', function(e) {
+		document.getElementById("pad-16").classList.toggle("active");
 	}, 'keyup');
 }
 // credit for mouse simulation code: http://stackoverflow.com/a/6158050
