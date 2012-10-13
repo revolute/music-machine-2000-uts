@@ -44,11 +44,11 @@ body {
 	min-height: 500px;
 }
 
-#left-column #selector {
+#left-column #vis {
 	min-height: 300px;
 }
 
-#left-column #vis {
+#left-column #selector {
 	background-color: #47abff;
 	min-height: 200px;
 }
