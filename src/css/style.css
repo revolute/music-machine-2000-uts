@@ -7,6 +7,11 @@ body {
 	display: block;
 }
 
+p {
+	margin: 0;
+	padding: 0;
+}
+
 #background {
 	background: url('../images/MIDI-body.png') no-repeat center;
 	width: 940px;
@@ -30,8 +35,8 @@ body {
 }
 
 #header {
-	background: url('../images/top-header.png') no-repeat center;
-	height: 100px;
+	background: url('../images/top-header.png') no-repeat center top;
+	height: 110px;
 }
 
 #header img {
@@ -41,14 +46,16 @@ body {
 #left-column {
 	float: left;
 	width: 350px;
-	min-height: 500px;
+	min-height: 490px;
 }
 
 #left-column #vis {
-	min-height: 300px;
+	min-height: 250px;
 }
 
 #vis-container {
+	margin-left: 11px;
+	margin-top: 10px;
 	width: 330px;
 	height: 226px;
 	background: url('../images/visualiser-window.png');
@@ -60,19 +67,18 @@ body {
 }
 
 #left-column #selector {
-	background-color: #47abff;
-	min-height: 200px;
+	min-height: 240px;
 }
 
 #right-column {
 	float: right;
 	width: 450px;
-	min-height: 500px;
+	min-height: 490px;
 }
 
 #right-column #pads {
 	/* background-color: #27983a; */
-	min-height: 450px;
+	min-height: 440px;
 }
 
 #right-column #player {
@@ -92,7 +98,7 @@ img.section-title {
 
 #pads ul {
 	list-style-type: none;
-	margin: 0;
+	margin: 10px 0 0 18px;
 	padding: 0;
 }
 
@@ -100,36 +106,56 @@ img.section-title {
 	display: inline;
 }
 
-#selector ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+/* toggle code from: http://jsfiddle.net/davidelrizzo/DYJkG/ */
+#selector-window {
+	margin-left: 11px;
+	margin-top: 10px;
+	width: 330px;
+	height: 226px;
+	background: url('../images/settings-window.png');
 }
 
-#selector ul li {
-	
+.selector-container {
+	float: left;
+	margin: 5px;
 }
 
-#selector label {
-	background-image: url('../images/setting-button-off.png');
-	overflow:auto;
-	width: 170px;
-	height: 36px;
+.selector-container div, .selector-container input, .selector-container label {
+    width:150px;
+    height:32px;
 }
 
-#selector label span {
-	display: block;
+.selector-container div {
+	position: relative;
+	margin: 5px 2px;
+	overflow: hidden;
 }
 
-#selector label input {
-    position: absolute;
-    top: -20px;
+.selector-container div label {
+    background: url('../images/setting-button-off.png');
+	position:absolute;
+    z-index:0;
+    padding:0;
+    text-align:left;
+	padding-left:25px;
 }
 
-#selector input:checked + span {
-    background-color: #404040;
-    color: #F7F7F7;
+.selector-container div input {
+	position:absolute;
+    z-index:1;
+    cursor:pointer;
+    opacity:0;
 }
+
+.selector-container div input:checked + label {
+    background: url('../images/setting-button-on.png');
+}
+
+.selector-container p {
+	text-align: center;
+	color: black;
+}
+
 
 /* skip (inspired by okcupid iphone interface)
 *******************************************************************************/
@@ -148,8 +174,8 @@ button.skip {
   text-decoration: none;
   text-align: center;
   /* text-shadow: 0 -1px 1px #000f4d; */
-  width: 90px;
-  min-height: 90px;
+  width: 93px;
+  min-height: 93px;
   transition: all 0.1s ease;
   -webkit-transition: all 0.1s ease;
   -moz-transition: all 0.1s ease;
