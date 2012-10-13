@@ -89,12 +89,6 @@ img.section-title {
 	display: inline;
 }
 
-#pads ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
 #selector ul {
 	list-style-type: none;
 	margin: 0;
@@ -132,6 +126,8 @@ button.skip {
   color: #000;
   font: bold 16px/1 "helvetica neue", helvetica, arial, sans-serif;
   padding: 7px 0 8px 0;
+  margin-right: 10px;
+  margin-bottom: 10px;
   text-decoration: none;
   text-align: center;
   /* text-shadow: 0 -1px 1px #000f4d; */
