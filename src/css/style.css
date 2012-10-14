@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700);
+
 body {
 	background: url('../images/Sternrekorder.jpg');
 	-moz-background-size: cover;
@@ -5,6 +7,8 @@ body {
 	-o-background-size: cover;
 	background-size: cover;
 	display: block;
+	font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+	font-size: 80%
 }
 
 p {
@@ -63,7 +67,7 @@ p {
 
 #vis-container canvas {
 	background-color: #000;
-	margin: 12px 14px;
+	margin: 8px 10px;
 }
 
 #left-column #selector {
@@ -117,7 +121,7 @@ img.section-title {
 
 .selector-container {
 	float: left;
-	margin: 5px;
+	margin: 10px 5px;
 }
 
 .selector-container div, .selector-container input, .selector-container label {
@@ -138,6 +142,7 @@ img.section-title {
     padding:0;
     text-align:left;
 	padding-left:25px;
+	line-height:2.5em;
 }
 
 .selector-container div input {
@@ -153,7 +158,16 @@ img.section-title {
 
 .selector-container p {
 	text-align: center;
+	font-weight: bold;
 	color: black;
+	text-transform: uppercase;
+}
+
+.selector-container span {
+	font-size: 0.75em;
+	text-align: right;
+	position: relative;
+	right: 0;
 }
 
 
