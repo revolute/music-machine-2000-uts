@@ -239,34 +239,34 @@ function KeyMappings() {
 	
 	// Selector button bindings
 	Mousetrap.bind('1', function(e) {
-		simulate(document.getElementById("instruments-1"), "click");
-	}, 'keypress');
-	Mousetrap.bind('2', function(e) {
-		simulate(document.getElementById("instruments-2"), "click");
-	}, 'keypress');
-	Mousetrap.bind('3', function(e) {
-		simulate(document.getElementById("instruments-3"), "click");
-	}, 'keypress');
-	Mousetrap.bind('4', function(e) {
-		simulate(document.getElementById("instruments-4"), "click");
-	}, 'keypress');
-	Mousetrap.bind('5', function(e) {
-		simulate(document.getElementById("instruments-5"), "click");
-	}, 'keypress');
-	Mousetrap.bind('6', function(e) {
 		simulate(document.getElementById("backing-tracks-1"), "click");
 	}, 'keypress');
-	Mousetrap.bind('7', function(e) {
+	Mousetrap.bind('2', function(e) {
 		simulate(document.getElementById("backing-tracks-2"), "click");
 	}, 'keypress');
-	Mousetrap.bind('8', function(e) {
+	Mousetrap.bind('3', function(e) {
 		simulate(document.getElementById("backing-tracks-3"), "click");
 	}, 'keypress');
-	Mousetrap.bind('9', function(e) {
+	Mousetrap.bind('4', function(e) {
 		simulate(document.getElementById("backing-tracks-4"), "click");
 	}, 'keypress');
-	Mousetrap.bind('0', function(e) {
+	Mousetrap.bind('5', function(e) {
 		simulate(document.getElementById("backing-tracks-5"), "click");
+	}, 'keypress');
+	Mousetrap.bind('6', function(e) {
+		simulate(document.getElementById("instruments-1"), "click");
+	}, 'keypress');
+	Mousetrap.bind('7', function(e) {
+		simulate(document.getElementById("instruments-2"), "click");
+	}, 'keypress');
+	Mousetrap.bind('8', function(e) {
+		simulate(document.getElementById("instruments-3"), "click");
+	}, 'keypress');
+	Mousetrap.bind('9', function(e) {
+		simulate(document.getElementById("instruments-4"), "click");
+	}, 'keypress');
+	Mousetrap.bind('0', function(e) {
+		simulate(document.getElementById("instruments-5"), "click");
 	}, 'keypress');
 }
 // credit for mouse simulation code: http://stackoverflow.com/a/6158050
