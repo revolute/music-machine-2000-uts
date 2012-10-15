@@ -86,7 +86,7 @@ p {
 }
 
 #right-column #player {
-	background-color: #c9d69c;
+	/* background-color: #c9d69c; */
 	min-height: 50px;
 }
 
@@ -188,7 +188,7 @@ button.skip {
   text-decoration: none;
   text-align: center;
   /* text-shadow: 0 -1px 1px #000f4d; */
-  width: 93px;
+  width: 94px;
   min-height: 93px;
   transition: all 0.1s ease;
   -webkit-transition: all 0.1s ease;
