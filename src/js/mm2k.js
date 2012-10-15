@@ -11,7 +11,12 @@ var jsProcessor;
 var gainNode;
 
 function init() {
-    context = new webkitAudioContext();
+	try {
+		context = new webkitAudioContext();
+	} catch(error) {
+		alert("Oh no! Your browser doesn't support Web Audio. Try using the latest version Google Chrome :)");
+		return;
+	}
     source = context.createBufferSource();
 	activeSoundboard = new Soundboard();
 	manager = new SoundboardManager();
