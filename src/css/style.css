@@ -164,10 +164,11 @@ img.section-title {
 }
 
 .selector-container span {
-	font-size: 0.75em;
+	font-size: 0.85em;
 	text-align: right;
 	position: relative;
-	right: 0;
+	top: 14px;
+	left: 136px;
 }
 
 
