@@ -8,14 +8,16 @@ var backingSsource;
 var manager;
 var activeSoundboard;
 var jsProcessor;
+var gainNode;
 
 function init() {
-	keyMappings = new KeyMappings();
     context = new webkitAudioContext();
     source = context.createBufferSource();
-	backingSource = context.createBufferSource();
 	activeSoundboard = new Soundboard();
-	manager = new SoundboardManager();	
+	manager = new SoundboardManager();
+	backingSource = context.createBufferSource();
+	backingSource.loop = true;
+	backingGainNode = context.createGainNode();
 	
     loadSample("./sounds/samples/drums/CYCdh_ElecK04-Clap.wav", "vibe");
 	loadSample("./sounds/samples/drums/CYCdh_ElecK04-ClHat01.wav", "vibe");
@@ -36,26 +38,26 @@ function init() {
 	
 	manager.setActiveBoard("vibe");
 	
-	backingSource.loop = true;
-	
 	jsProcessor = context.createJavaScriptNode(2048);
     jsProcessor.onaudioprocess = audioAvailable;
 	source.connect(jsProcessor);
-	backingSource.connect(jsProcessor);
+	backingSource.connect(backingGainNode);
+	backingGainNode.connect(jsProcessor);
     jsProcessor.connect(context.destination);
 
 	visualizer();
+	keyMappings = new KeyMappings();
 }
 
 function playBackingTrack() {
-    loadBackingSample("./sounds/backing_tracks/Beat04_130BPM(Drums).wav");
+    loadBackingTrack("./sounds/backing_tracks/Beat04_130BPM(Drums).wav");
 }
 
 function stopBackingTrack() {
 	backingSource.noteOff(0);
 }
 
-function loadBackingSample(url) {
+function loadBackingTrack(url) {
     // Load asynchronously
 
     var request = new XMLHttpRequest();
@@ -64,7 +66,8 @@ function loadBackingSample(url) {
 
     request.onload = function() {
 		backingSource = context.createBufferSource();
-		backingSource.connect(jsProcessor);
+		backingSource.connect(backingGainNode);
+		backingGainNode.connect(jsProcessor);
         backingSource.buffer = context.createBuffer(request.response, false);
         backingSource.looping = true;
         backingSource.noteOn(0);
@@ -93,7 +96,6 @@ function SoundboardManager() {
 			}
 		}
 	}
-
 }
 
 function Soundboard() {
@@ -134,6 +136,12 @@ function playSample(sound) {
 	} catch(error) {
 		console.log('The linked sound was not found! ' + error.message);
 	}
+}
+
+function changeBackingVolume(volumeSlider) {
+	var volume = volumeSlider.value;
+	var fraction = parseInt(volume) / parseInt(volumeSlider.max);
+	backingGainNode.gain.value = fraction * fraction;
 }
 
 function KeyMappings() {

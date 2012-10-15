@@ -90,6 +90,10 @@ p {
 	min-height: 50px;
 }
 
+#player > input {
+	vertical-align: bottom;
+}
+
 #header, #left-column > div, #right-column > div {
 	overflow: hidden;
 }
