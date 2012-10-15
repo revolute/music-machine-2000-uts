@@ -17,12 +17,26 @@ function init() {
 	activeSoundboard = new Soundboard();
 	manager = new SoundboardManager();	
 	
-    loadSample("./sounds/test/samples/syntklocka_stab_1.ogg", "vibe");
-	loadSample("./sounds/test/samples/syntklocka_stab_2.ogg", "vibe");
-	loadSample("./sounds/test/samples/syntklocka_stab_3.ogg", "vibe");
-	loadSample("./sounds/test/samples/syntklocka_stab_4.ogg", "vibe");
-	loadSample("./sounds/test/samples/syntklocka_stab_5.ogg", "vibe");
+    loadSample("./sounds/samples/drums/CYCdh_ElecK04-Clap.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-ClHat01.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-ClHat02.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Cymbal01.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Cymbal02.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-HfHat.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Kick01.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Kick02.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Kick03.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Snr01.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Snr02.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Snr03.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Tom01.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Tom02.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Tom03.wav", "vibe");
+	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Tom04.wav", "vibe");
+	
 	manager.setActiveBoard("vibe");
+	
+	backingSource.loop = true;
 	
 	jsProcessor = context.createJavaScriptNode(2048);
     jsProcessor.onaudioprocess = audioAvailable;
@@ -34,7 +48,7 @@ function init() {
 }
 
 function playBackingTrack() {
-    loadBackingSample("./js/vis/song2.ogg");
+    loadBackingSample("./sounds/backing_tracks/Beat04_130BPM(Drums).wav");
 }
 
 function stopBackingTrack() {
