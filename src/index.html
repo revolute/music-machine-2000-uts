@@ -5,6 +5,7 @@
 	<script src="./js/vis/dsp.js"></script>
 	<script src="./js/mousetrap.js"></script>
 	<script src="./js/mm2k.js"></script>
+	<script src="./js/soundboards.js"></script>
 	<script defer src="./js/vis/visualizer.js"></script>
 </head>
 
@@ -66,8 +67,8 @@
 					</ul>				
 				</div>
 				<div id="player">
-					<button onclick="playBackingTrack()">Play backing track</button>
-					<button onclick="stopBackingTrack()">Stop backing track</button>
+					<img class="section-title" src="images/backing-track-name-bar.png" alt="Backing Track UI">
+					<button onclick="toggleBackingTrack()">Play/stop backing track</button>
 					<span>Volume:</span><input type="range" min="0" max="100" value="100" onchange="changeBackingVolume(this);">
 				</div>
 			</div>
