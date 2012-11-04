@@ -26,6 +26,9 @@ var BACKING_GATE = 2;
 var BACKING_BLUES = 3;
 var BACKING_BEDLAM = 4;
 
+// Declare default volume for backing track
+var DEFAULT_BACKING_VOL = 50;
+
 function init() {
 	//Check that the browser is supported
 	try {
@@ -38,18 +41,19 @@ function init() {
 	//Set up the WebAudio objects
     source = context.createBufferSource();
 	manager = new SoundboardManager();
-	activeSoundboard = 0;
+	activeSoundboard = BOARD_DRUMS;
 	//activeSoundboard = new Soundboard();
 
 	trackManager = new BackingTrackManager();
 	trackManager.loadTrack("./sounds/backing_tracks/Beat04_130BPM(Drums).wav", 0);
-	activeTrack = 0;
+	activeTrack = BACKING_UNICORN;
 
 	//backingSource = context.createBufferSource();
 	//backingSource.loop = true;
 
 	//Load the samples up
-    manager.loadSample("./sounds/samples/drums/CYCdh_ElecK04-Clap.wav", "Clap", 0, BOARD_DRUMS);
+    loadSounds();
+    //manager.loadSample("./sounds/samples/drums/CYCdh_ElecK04-Clap.wav", "Clap", 0, BOARD_DRUMS);
 	
 	//Set up the intermediary processing node for the visualiser
 	jsProcessor = context.createJavaScriptNode(2048);
@@ -70,7 +74,7 @@ function init() {
 
 function setActiveBoard(soundboardID) {
 	activeSoundboard = soundboardID;
-	for (var i = 1; i < 16; i++) {
+	for (var i = 1; i <= 16; i++) {
 		document.getElementById('pad-' + i).innerHTML = manager.getSound(soundboardID, i - 1).getName();
 	};
 }
@@ -150,8 +154,11 @@ function SoundboardManager() {
 	var soundboards = new Array();
 
 	//Populate the array with the soundboards
-	soundboards[0] = new Soundboard(0);
-	soundboards[1] = new Soundboard(1);
+	soundboards[BOARD_DRUMS] = new Soundboard(BOARD_DRUMS);
+	soundboards[BOARD_GUITAR] = new Soundboard(BOARD_GUITAR);
+	soundboards[BOARD_PIANO] = new Soundboard(BOARD_PIANO);
+	soundboards[BOARD_TRANCE] = new Soundboard(BOARD_TRANCE);
+	soundboards[BOARD_8BIT] = new Soundboard(BOARD_8BIT);
 
 	this.addSound = function (name, soundID, soundboardID, soundToAdd) {
 		soundboards[soundboardID].addSound(name, soundID, soundboardID, soundToAdd);

@@ -35,11 +35,11 @@
 						</div>
 						<div class="selector-container">
 							<p>Instruments</p>
-							<div><input type="radio" checked name="instruments" id="instruments-1" /><label for="instruments-1">Drums</label><span>6</span></div>
-							<div><input type="radio" name="instruments" id="instruments-2" /><label for="instruments-2">Guitar</label><span>7</span></div>
-							<div><input type="radio" name="instruments" id="instruments-3" /><label for="instruments-3">Piano</label><span>8</span></div>
-							<div><input type="radio" name="instruments" id="instruments-4" /><label for="instruments-4">Trance</label><span>9</span></div>
-							<div><input type="radio" name="instruments" id="instruments-5" /><label for="instruments-5">8-Bit</label><span>0</span></div>	
+							<div><input type="radio" checked name="instruments" id="instruments-1" onclick="setActiveBoard(0);" /><label for="instruments-1">Drums</label><span>6</span></div>
+							<div><input type="radio" name="instruments" id="instruments-2" onclick="setActiveBoard(1);" /><label for="instruments-2">Guitar</label><span>7</span></div>
+							<div><input type="radio" name="instruments" id="instruments-3" onclick="setActiveBoard(2);" /><label for="instruments-3">Piano</label><span>8</span></div>
+							<div><input type="radio" name="instruments" id="instruments-4" onclick="setActiveBoard(3);" /><label for="instruments-4">Trance</label><span>9</span></div>
+							<div><input type="radio" name="instruments" id="instruments-5" onclick="setActiveBoard(4);" /><label for="instruments-5">8-Bit</label><span>0</span></div>	
 						</div>
 					</div>		
 				</div>
@@ -48,27 +48,27 @@
 				<div id="pads">
 					<img class="section-title" src="images/trigger-pad-section-bar.png" alt="Trigger Pad Section">
 					<ul>
-						<li><button id="pad-1" class="skip" onclick="playSample(activeSoundboard.getSound(0));">Q</button></li>
-						<li><button id="pad-2" class="skip" onclick="playSample(activeSoundboard.getSound(1));">W</button></li>
-						<li><button id="pad-3" class="skip" onclick="playSample(activeSoundboard.getSound(2));">E</button></li>
-						<li><button id="pad-4" class="skip" onclick="playSample(activeSoundboard.getSound(3));">R</button></li>
-						<li><button id="pad-5" class="skip" onclick="playSample(activeSoundboard.getSound(4));">T</button></li>
-						<li><button id="pad-6" class="skip" onclick="playSample(activeSoundboard.getSound(5));">Y</button></li>
-						<li><button id="pad-7" class="skip" onclick="playSample(activeSoundboard.getSound(6));">U</button></li>
-						<li><button id="pad-8" class="skip" onclick="playSample(activeSoundboard.getSound(7));">I</button></li>
-						<li><button id="pad-9" class="skip" onclick="playSample(activeSoundboard.getSound(8));">A</button></li>
-						<li><button id="pad-10" class="skip" onclick="playSample(activeSoundboard.getSound(9));">S</button></li>
-						<li><button id="pad-11" class="skip" onclick="playSample(activeSoundboard.getSound(10));">D</button></li>
-						<li><button id="pad-12" class="skip" onclick="playSample(activeSoundboard.getSound(11));">F</button></li>
-						<li><button id="pad-13" class="skip" onclick="playSample(activeSoundboard.getSound(12));">G</button></li>
-						<li><button id="pad-14" class="skip" onclick="playSample(activeSoundboard.getSound(13));">H</button></li>
-						<li><button id="pad-15" class="skip" onclick="playSample(activeSoundboard.getSound(14));">J</button></li>
-						<li><button id="pad-16" class="skip" onclick="playSample(activeSoundboard.getSound(15));">K</button></li>
+						<li><div>HEY!</div><button id="pad-1" class="skip" onclick="manager.play(0);">Q</button></li>
+						<li><button id="pad-2" class="skip" onclick="manager.play(1);">W</button></li>
+						<li><button id="pad-3" class="skip" onclick="manager.play(2);">E</button></li>
+						<li><button id="pad-4" class="skip" onclick="manager.play(3);">R</button></li>
+						<li><button id="pad-5" class="skip" onclick="manager.play(4);">T</button></li>
+						<li><button id="pad-6" class="skip" onclick="manager.play(5);">Y</button></li>
+						<li><button id="pad-7" class="skip" onclick="manager.play(6);">U</button></li>
+						<li><button id="pad-8" class="skip" onclick="manager.play(7);">I</button></li>
+						<li><button id="pad-9" class="skip" onclick="manager.play(8);">A</button></li>
+						<li><button id="pad-10" class="skip" onclick="manager.play(9);">S</button></li>
+						<li><button id="pad-11" class="skip" onclick="manager.play(10);">D</button></li>
+						<li><button id="pad-12" class="skip" onclick="manager.play(11);">F</button></li>
+						<li><button id="pad-13" class="skip" onclick="manager.play(12);">G</button></li>
+						<li><button id="pad-14" class="skip" onclick="manager.play(13);">H</button></li>
+						<li><button id="pad-15" class="skip" onclick="manager.play(14);">J</button></li>
+						<li><button id="pad-16" class="skip" onclick="manager.play(15);">K</button></li>
 					</ul>				
 				</div>
 				<div id="player">
 					<img class="section-title" src="images/backing-track-name-bar.png" alt="Backing Track UI">
-					<button onclick="toggleBackingTrack()">Play/stop backing track</button>
+					<button onclick="trackManager.toggleBackingTrack();">Play/stop backing track</button>
 					<span>Volume:</span><input type="range" min="0" max="100" value="100" onchange="changeBackingVolume(this);">
 				</div>
 			</div>
