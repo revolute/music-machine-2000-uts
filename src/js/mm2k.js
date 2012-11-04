@@ -6,6 +6,7 @@ var context;
 var outputNode;
 var source;
 var backingSource;
+var activeTrack;
 var manager;
 var activeSoundboard;
 var jsProcessor;
@@ -18,6 +19,13 @@ var BOARD_PIANO = 2;
 var BOARD_TRANCE = 3;
 var BOARD_8BIT = 4;
 
+//Declare BACKING TRACKS
+var BACKING_UNICORN = 0;
+var BACKING_RETROTIMER = 1;
+var BACKING_GATE = 2;
+var BACKING_BLUES = 3;
+var BACKING_BEDLAM = 4;
+
 function init() {
 	//Check that the browser is supported
 	try {
@@ -29,34 +37,19 @@ function init() {
 
 	//Set up the WebAudio objects
     source = context.createBufferSource();
-	activeSoundboard = new Soundboard();
 	manager = new SoundboardManager();
-	backingSource = context.createBufferSource();
-	backingSource.loop = true;
-	backingGainNode = context.createGainNode();
+	activeSoundboard = 0;
+	//activeSoundboard = new Soundboard();
+
+	trackManager = new BackingTrackManager();
+	trackManager.loadTrack("./sounds/backing_tracks/Beat04_130BPM(Drums).wav", 0);
+	activeTrack = 0;
+
+	//backingSource = context.createBufferSource();
+	//backingSource.loop = true;
 
 	//Load the samples up
-	//function loadSample(url, name, soundID, soundboardID) {
-    loadSample("./sounds/samples/drums/CYCdh_ElecK04-Clap.wav", "Clap", 0, BOARD_DRUMS);
-    /* TO MOVE TO NEW FORMAT
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-ClHat01.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-ClHat02.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Cymbal01.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Cymbal02.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-HfHat.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Kick01.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Kick02.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Kick03.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Snr01.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Snr02.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Snr03.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Tom01.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Tom02.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Tom03.wav", "vibe");
-	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Tom04.wav", "vibe");
-	*/
-	
-	manager.setActiveBoard(BOARD_DRUMS);
+    manager.loadSample("./sounds/samples/drums/CYCdh_ElecK04-Clap.wav", "Clap", 0, BOARD_DRUMS);
 	
 	//Set up the intermediary processing node for the visualiser
 	jsProcessor = context.createJavaScriptNode(2048);
@@ -64,40 +57,93 @@ function init() {
 	source.connect(jsProcessor);
 
 	//Set up the backing track
-	backingSource.connect(backingGainNode);
+	backingGainNode = context.createGainNode();
+	//backingSource.connect(backingGainNode);
 	backingGainNode.connect(jsProcessor);
+	
+	//Connect everything up
     jsProcessor.connect(context.destination);
 	visualizer();
 	keyMappings = new KeyMappings();
+	//setActiveBoard(BOARD_DRUMS);
 }
 
-function toggleBackingTrack() {
-	//supercedes playBackingTrack, fixes the multiple playback issue
-	if (backingSource.playbackState == 2) {
-		//Pause it, it is currently playing
-		backingSource.noteOff(0);
-	}
-	else {
-		loadBackingTrack("./sounds/backing_tracks/Beat04_130BPM(Drums).wav");
-	}
+function setActiveBoard(soundboardID) {
+	activeSoundboard = soundboardID;
+	for (var i = 1; i < 16; i++) {
+		document.getElementById('pad-' + i).innerHTML = manager.getSound(soundboardID, i - 1).getName();
+	};
 }
 
-function loadBackingTrack(url) {
-    // Load asynchronously
+function BackingTrackManager () {
+	var backingTracks = new Array();
 
-    var request = new XMLHttpRequest();
-    request.open("GET", url, true);
-    request.responseType = "arraybuffer";
+	function BackingTrack(trackID, track) {
+		this.trackID = trackID; //0-4
+		this.track = track; //the actual sound object
 
-    request.onload = function() {
-		backingSource = context.createBufferSource();
-		backingSource.connect(backingGainNode);
-		backingGainNode.connect(jsProcessor);
-        backingSource.buffer = context.createBuffer(request.response, false);
-        backingSource.loop = true;
-        backingSource.noteOn(0);
-    }
-    request.send();
+		this.getTrack = function() {
+		     return track;
+		}
+
+		this.getID = function() {
+		     return trackID;
+		}
+	}
+
+	this.addTrack = function(trackID, track) {
+		backingTracks[trackID] = new BackingTrack(trackID, track);
+	}
+
+	this.loadTrack = function(url, trackID) {
+		var trackToAdd;
+	    var request = new XMLHttpRequest();
+	    request.open("GET", url, true);
+	    request.responseType = "arraybuffer";
+
+	    request.onload = function() {
+	      trackToAdd = context.createBuffer(request.response, false);
+		  trackManager.addTrack(trackID, trackToAdd);
+	    }
+	    request.send();
+	}
+
+	this.playTrack = function(track) {
+		backingSource = context.createBufferSource(); // creates a sound source
+		try {
+			backingSource.buffer = track;                  // tell the source which sound to play
+			backingSource.loop = true;
+			backingSource.connect(backingGainNode);
+			backingGainNode.connect(jsProcessor);
+			backingSource.noteOn(0);                          // play the source now
+		} catch(error) {
+			console.log('The linked sound was not found! ' + error.message);
+		}
+	}
+
+	this.getTracks = function() {
+		return backingTracks;
+	}
+
+	this.setActiveTrack = function(activeTrackID) {
+		activeTrack = activeTrackID;
+	}
+
+
+	this.toggleBackingTrack = function() {
+		//supercedes playBackingTrack, fixes the multiple playback issue
+		if (backingSource != null) {
+			if (backingSource.playbackState == 2) {
+				//Pause it, it is currently playing
+				backingSource.noteOff(0);
+			} else {
+				this.playTrack(backingTracks[activeTrack].getTrack());
+				//loadBackingTrack("./sounds/backing_tracks/Beat04_130BPM(Drums).wav");
+			}
+		} else {
+			this.playTrack(backingTracks[activeTrack].getTrack());
+		}
+	}
 }
 
 function SoundboardManager() {
@@ -109,93 +155,88 @@ function SoundboardManager() {
 
 	this.addSound = function (name, soundID, soundboardID, soundToAdd) {
 		soundboards[soundboardID].addSound(name, soundID, soundboardID, soundToAdd);
-		/* OLD CODE. Removing the lookup should speed up adding and allow us to store more playback info.
-		for (var key in soundboards) {
-			if (key == soundboardID) {
-				soundboards[key].addSound(soundToAdd);
-			}
-		}*/
 	}
-	
-	this.setActiveBoard = function(soundboardID) {
-		for (var key in soundboards) {
-			if (key == soundboardID) {
-				activeSoundboard = soundboards[key];
+
+	this.getSound = function(soundboardID, soundID) {
+		return soundboards[soundboardID].getSound(soundID);
+	}
+
+	this.loadSample = function(url, name, soundID, soundboardID) {
+		var soundToAdd;
+	    var request = new XMLHttpRequest();
+	    request.open("GET", url, true);
+	    request.responseType = "arraybuffer";
+
+	    request.onload = function() {
+	      soundToAdd = context.createBuffer(request.response, false);
+		  manager.addSound(name, soundID, soundboardID, soundToAdd);
+	    }
+	    request.send();
+	}
+
+	this.play = function(soundID) {
+		this.playSample(soundboards[activeSoundboard].getSound(soundID).getSound());
+	}
+
+	this.playSample = function(sound) {
+		var source = context.createBufferSource(); // creates a sound source
+		try {
+			source.buffer = sound;                  // tell the source which sound to play
+			source.connect(jsProcessor);
+			//source.connect(context.destination);       // connect the source to the context's destination (the speakers)
+			source.noteOn(0);                          // play the source now
+		} catch(error) {
+			console.log('The linked sound was not found! ' + error.message);
+		}
+	}
+
+	function Soundboard(soundboardID) {
+		this.soundboardID = soundboardID;
+
+		var sounds = new Array();
+
+		this.getSound = function (id) {
+			return sounds[id];
+		}
+
+		this.getSoundboardID = function (id) {
+			return soundboardID;
+		}
+		
+		this.addSound = function (name, soundID, soundboardID, sound) {
+			if (typeof sounds == 'undefined')
+			{
+				console.log('Error: This code should not be triggered.');
 			}
+			sounds[soundID] = (new Sound(name, soundID, soundboardID, sound)); //add the new sound to the soundboard
+		}
+	}
+
+	function Sound(name, soundID, soundboardID, sound) {
+		this.name = name;
+		this.soundID = soundID; //0-15
+		this.soundboardID = soundboardID; //0-4
+		this.sound = sound; //the actual sound object
+
+		this.getSound = function() {
+		     return sound;
+		}
+
+		this.getName = function() {
+		     return name;
+		}
+
+		this.getID = function() {
+		     return soundID;
+		}
+
+		this.getSoundboardID = function() {
+			return soundboardID;
 		}
 	}
 }
 
-function Soundboard(soundboardID) {
-	this.soundboardID = soundboardID;
-
-	var sounds = new Array();
-
-	this.getSound = function (id) {
-		return sounds[id].getSound();
-	}
-
-	this.getSoundboardID = function (id) {
-		return soundboardID;
-	}
-	
-	this.addSound = function (name, soundID, soundboardID, sound) {
-		if (typeof sounds == 'undefined')
-		{
-			console.log('Error: This code should not be triggered.');
-		}
-		sounds[soundID] = (new Sound(name, soundID, soundboardID, sound)); //add the new sound to the soundboard
-	}
-}
-
-function Sound(name, soundID, soundboardID, sound) {
-	this.name = name;
-	this.soundID = soundID; //0-15
-	this.soundboardID = soundboardID; //0-4
-	this.sound = sound; //the actual sound object
-
-	this.getSound = function() {
-	     return sound;
-	}
-
-	this.getName = function() {
-	     return name;
-	}
-
-	this.getID = function() {
-	     return soundID;
-	}
-
-	this.getSoundboardID = function() {
-		return soundboardID;
-	}
-}
-
-function loadSample(url, name, soundID, soundboardID) {
-	var soundToAdd;
-    var request = new XMLHttpRequest();
-    request.open("GET", url, true);
-    request.responseType = "arraybuffer";
-
-    request.onload = function() {
-      soundToAdd = context.createBuffer(request.response, false);
-	  manager.addSound(name, soundID, soundboardID, soundToAdd);
-    }
-    request.send();
-}
-
-function playSample(sound) {
-	var source = context.createBufferSource(); // creates a sound source
-	try {
-		source.buffer = sound;                  // tell the source which sound to play
-		source.connect(jsProcessor);
-		//source.connect(context.destination);       // connect the source to the context's destination (the speakers)
-		source.noteOn(0);                          // play the source now
-	} catch(error) {
-		console.log('The linked sound was not found! ' + error.message);
-	}
-}
-
+//MOVE THIS TO BACKINGTRACK
 function changeBackingVolume(volumeSlider) {
 	var volume = volumeSlider.value;
 	var fraction = parseInt(volume) / parseInt(volumeSlider.max);
