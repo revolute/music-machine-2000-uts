@@ -5,7 +5,7 @@ var keyMappings;
 var context;
 var outputNode;
 var source;
-var backingSsource;
+var backingSource;
 var manager;
 var activeSoundboard;
 var jsProcessor;
@@ -58,9 +58,12 @@ function init() {
 	
 	manager.setActiveBoard(BOARD_DRUMS);
 	
+	//Set up the intermediary processing node for the visualiser
 	jsProcessor = context.createJavaScriptNode(2048);
     jsProcessor.onaudioprocess = audioAvailable;
 	source.connect(jsProcessor);
+
+	//Set up the backing track
 	backingSource.connect(backingGainNode);
 	backingGainNode.connect(jsProcessor);
     jsProcessor.connect(context.destination);
@@ -68,12 +71,15 @@ function init() {
 	keyMappings = new KeyMappings();
 }
 
-function playBackingTrack() {
-    loadBackingTrack("./sounds/backing_tracks/Beat04_130BPM(Drums).wav");
-}
-
-function stopBackingTrack() {
-	backingSource.noteOff(0);
+function toggleBackingTrack() {
+	//supercedes playBackingTrack, fixes the multiple playback issue
+	if (backingSource.playbackState == 2) {
+		//Pause it, it is currently playing
+		backingSource.noteOff(0);
+	}
+	else {
+		loadBackingTrack("./sounds/backing_tracks/Beat04_130BPM(Drums).wav");
+	}
 }
 
 function loadBackingTrack(url) {
@@ -88,7 +94,7 @@ function loadBackingTrack(url) {
 		backingSource.connect(backingGainNode);
 		backingGainNode.connect(jsProcessor);
         backingSource.buffer = context.createBuffer(request.response, false);
-        backingSource.looping = true;
+        backingSource.loop = true;
         backingSource.noteOn(0);
     }
     request.send();
