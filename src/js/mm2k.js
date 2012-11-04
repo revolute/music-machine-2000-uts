@@ -1,5 +1,6 @@
 window.onload = init;
 
+//Setup document-scoped variables
 var keyMappings;
 var context;
 var outputNode;
@@ -10,21 +11,34 @@ var activeSoundboard;
 var jsProcessor;
 var gainNode;
 
+//Declare soundboards
+var BOARD_DRUMS = 0;
+var BOARD_GUITAR = 1;
+var BOARD_PIANO = 2;
+var BOARD_TRANCE = 3;
+var BOARD_8BIT = 4;
+
 function init() {
+	//Check that the browser is supported
 	try {
 		context = new webkitAudioContext();
 	} catch(error) {
 		alert("Oh no! Your browser doesn't support Web Audio. Try using the latest version Google Chrome :)");
 		return;
 	}
+
+	//Set up the WebAudio objects
     source = context.createBufferSource();
 	activeSoundboard = new Soundboard();
 	manager = new SoundboardManager();
 	backingSource = context.createBufferSource();
 	backingSource.loop = true;
 	backingGainNode = context.createGainNode();
-	
-    loadSample("./sounds/samples/drums/CYCdh_ElecK04-Clap.wav", "vibe");
+
+	//Load the samples up
+	//function loadSample(url, name, soundID, soundboardID) {
+    loadSample("./sounds/samples/drums/CYCdh_ElecK04-Clap.wav", "Clap", 0, BOARD_DRUMS);
+    /* TO MOVE TO NEW FORMAT
 	loadSample("./sounds/samples/drums/CYCdh_ElecK04-ClHat01.wav", "vibe");
 	loadSample("./sounds/samples/drums/CYCdh_ElecK04-ClHat02.wav", "vibe");
 	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Cymbal01.wav", "vibe");
@@ -40,8 +54,9 @@ function init() {
 	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Tom02.wav", "vibe");
 	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Tom03.wav", "vibe");
 	loadSample("./sounds/samples/drums/CYCdh_ElecK04-Tom04.wav", "vibe");
+	*/
 	
-	manager.setActiveBoard("vibe");
+	manager.setActiveBoard(BOARD_DRUMS);
 	
 	jsProcessor = context.createJavaScriptNode(2048);
     jsProcessor.onaudioprocess = audioAvailable;
@@ -49,7 +64,6 @@ function init() {
 	backingSource.connect(backingGainNode);
 	backingGainNode.connect(jsProcessor);
     jsProcessor.connect(context.destination);
-
 	visualizer();
 	keyMappings = new KeyMappings();
 }
@@ -81,17 +95,20 @@ function loadBackingTrack(url) {
 }
 
 function SoundboardManager() {
-	var soundboards = {
-		vibe: new Soundboard(), 
-		test: new Soundboard()
-	}
-	
-	this.addSound = function (soundToAdd, soundboardID) {
+	var soundboards = new Array();
+
+	//Populate the array with the soundboards
+	soundboards[0] = new Soundboard(0);
+	soundboards[1] = new Soundboard(1);
+
+	this.addSound = function (name, soundID, soundboardID, soundToAdd) {
+		soundboards[soundboardID].addSound(name, soundID, soundboardID, soundToAdd);
+		/* OLD CODE. Removing the lookup should speed up adding and allow us to store more playback info.
 		for (var key in soundboards) {
 			if (key == soundboardID) {
 				soundboards[key].addSound(soundToAdd);
 			}
-		}
+		}*/
 	}
 	
 	this.setActiveBoard = function(soundboardID) {
@@ -103,30 +120,60 @@ function SoundboardManager() {
 	}
 }
 
-function Soundboard() {
+function Soundboard(soundboardID) {
+	this.soundboardID = soundboardID;
+
 	var sounds = new Array();
+
 	this.getSound = function (id) {
-		return sounds[id];
+		return sounds[id].getSound();
+	}
+
+	this.getSoundboardID = function (id) {
+		return soundboardID;
 	}
 	
-	this.addSound = function (param) {
+	this.addSound = function (name, soundID, soundboardID, sound) {
 		if (typeof sounds == 'undefined')
 		{
 			console.log('Error: This code should not be triggered.');
 		}
-		sounds.push(param);
+		sounds[soundID] = (new Sound(name, soundID, soundboardID, sound)); //add the new sound to the soundboard
 	}
 }
 
-function loadSample(url, soundboardID) {
-	var sound;
+function Sound(name, soundID, soundboardID, sound) {
+	this.name = name;
+	this.soundID = soundID; //0-15
+	this.soundboardID = soundboardID; //0-4
+	this.sound = sound; //the actual sound object
+
+	this.getSound = function() {
+	     return sound;
+	}
+
+	this.getName = function() {
+	     return name;
+	}
+
+	this.getID = function() {
+	     return soundID;
+	}
+
+	this.getSoundboardID = function() {
+		return soundboardID;
+	}
+}
+
+function loadSample(url, name, soundID, soundboardID) {
+	var soundToAdd;
     var request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.responseType = "arraybuffer";
 
     request.onload = function() {
-      sound = context.createBuffer(request.response, false);
-	  manager.addSound(sound, soundboardID);
+      soundToAdd = context.createBuffer(request.response, false);
+	  manager.addSound(name, soundID, soundboardID, soundToAdd);
     }
     request.send();
 }
