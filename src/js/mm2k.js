@@ -69,6 +69,8 @@ function init() {
 	backingGainNode = context.createGainNode();
 	//backingSource.connect(backingGainNode);
 	backingGainNode.connect(jsProcessor);
+	// Set the default volume to whatever the default has been set in the HTML
+	changeBackingVolume(document.getElementById('volume-slider'));
 	
 	//Connect everything up
     jsProcessor.connect(context.destination);
