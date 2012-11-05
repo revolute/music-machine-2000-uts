@@ -46,6 +46,11 @@ function init() {
 
 	trackManager = new BackingTrackManager();
 	trackManager.loadTrack("./sounds/backing_tracks/Beat04_130BPM(Drums).wav", 0);
+	trackManager.loadTrack("./sounds/backing_tracks/28(140_BPM).wav", 1);
+	trackManager.loadTrack("./sounds/backing_tracks/35(135_BPM).wav", 2);
+	trackManager.loadTrack("./sounds/backing_tracks/BeatK04 97-03.wav", 3);
+	trackManager.loadTrack("./sounds/backing_tracks/CM139_8Bit_Beat02(120BPM).wav", 4);
+	trackManager.loadTrack("./sounds/backing_tracks/Loop02.wav", 5);
 	activeTrack = BACKING_UNICORN;
 
 	//backingSource = context.createBufferSource();
@@ -396,6 +401,11 @@ function KeyMappings() {
 	Mousetrap.bind('0', function(e) {
 		simulate(document.getElementById("instruments-5"), "click");
 	}, 'keypress');
+
+	// Backing track bindings
+	Mousetrap.bind('space', function(e) {
+		simulate(document.getElementById("backing-toggle"), "click");
+	});
 }
 // credit for mouse simulation code: http://stackoverflow.com/a/6158050
 

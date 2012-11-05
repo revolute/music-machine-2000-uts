@@ -27,11 +27,11 @@
 					<div id="selector-window">
 						<div class="selector-container">
 							<p>Backing Tracks</p>
-							<div><input type="radio" checked name="backing-tracks" id="backing-tracks-1" /><label for="backing-tracks-1">Dancing Unicorn</label><span>1</span></div>
-							<div><input type="radio" name="backing-tracks" id="backing-tracks-2" /><label for="backing-track-2">Retrotimer</label><span>2</span></div>
-							<div><input type="radio" name="backing-tracks" id="backing-tracks-3" /><label for="backing-track-3">Heavens Gate</label><span>3</span></div>
-							<div><input type="radio" name="backing-tracks" id="backing-tracks-4" /><label for="backing-track-4">Madness Blues</label><span>4</span></div>
-							<div><input type="radio" name="backing-tracks" id="backing-tracks-5" /><label for="backing-track-5">Bedlam</label><span>5</span></div>
+							<div><input type="radio" checked name="backing-tracks" id="backing-tracks-1" onclick="trackManager.setActiveTrack(0);" /><label for="backing-tracks-1">Dancing Unicorn</label><span>1</span></div>
+							<div><input type="radio" name="backing-tracks" id="backing-tracks-2" onclick="trackManager.setActiveTrack(1);" /><label for="backing-track-2">Retrotimer</label><span>2</span></div>
+							<div><input type="radio" name="backing-tracks" id="backing-tracks-3" onclick="trackManager.setActiveTrack(2);" /><label for="backing-track-3">Heavens Gate</label><span>3</span></div>
+							<div><input type="radio" name="backing-tracks" id="backing-tracks-4" onclick="trackManager.setActiveTrack(3);" /><label for="backing-track-4">Madness Blues</label><span>4</span></div>
+							<div><input type="radio" name="backing-tracks" id="backing-tracks-5" onclick="trackManager.setActiveTrack(4);" /><label for="backing-track-5">Bedlam</label><span>5</span></div>
 						</div>
 						<div class="selector-container">
 							<p>Instruments</p>
@@ -48,7 +48,7 @@
 				<div id="pads">
 					<img class="section-title" src="images/trigger-pad-section-bar.png" alt="Trigger Pad Section">
 					<ul>
-						<li><div>HEY!</div><button id="pad-1" class="skip" onclick="manager.play(0);">Q</button></li>
+						<li><button id="pad-1" class="skip" onclick="manager.play(0);">Q</button></li>
 						<li><button id="pad-2" class="skip" onclick="manager.play(1);">W</button></li>
 						<li><button id="pad-3" class="skip" onclick="manager.play(2);">E</button></li>
 						<li><button id="pad-4" class="skip" onclick="manager.play(3);">R</button></li>
@@ -68,8 +68,10 @@
 				</div>
 				<div id="player">
 					<img class="section-title" src="images/backing-track-name-bar.png" alt="Backing Track UI">
-					<button onclick="trackManager.toggleBackingTrack();">Play/stop backing track</button>
-					<span>Volume:</span><input type="range" min="0" max="100" value="100" onchange="changeBackingVolume(this);">
+					<div id="player-container">
+						<button id="backing-toggle" onclick="trackManager.toggleBackingTrack();">Play/stop backing track</button>
+						<span>Volume:</span><input type="range" min="0" max="100" value="100" onchange="changeBackingVolume(this);">
+					</div>
 				</div>
 			</div>
 		</div>
