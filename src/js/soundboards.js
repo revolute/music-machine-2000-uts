@@ -30,34 +30,34 @@ function loadSounds() {
 
 	// Guitar board
 	manager.loadSample("./sounds/samples/guitar/001_D1_PM_4.wav", "Low-D", 0, BOARD_GUITAR);
-	manager.loadSample("./sounds/samples/guitar/002_D#1_PM_4.wav", "Low-D#", 1, BOARD_GUITAR);
+	manager.loadSample("./sounds/samples/guitar/002_Dsharp1_PM_4.wav", "Low-D#", 1, BOARD_GUITAR);
 	manager.loadSample("./sounds/samples/guitar/003_E1_PM_4.wav", "Low-E", 2, BOARD_GUITAR);
-	manager.loadSample("./sounds/samples/guitar/004_F1_PM_4", "Low-F", 3, BOARD_GUITAR);
-	manager.loadSample("./sounds/samples/guitar/005_F#1_PM_4.wav", "Low-F#", 4, BOARD_GUITAR);
+	manager.loadSample("./sounds/samples/guitar/004_F1_PM_4.wav", "Low-F", 3, BOARD_GUITAR);
+	manager.loadSample("./sounds/samples/guitar/005_Fsharp1_PM_4.wav", "Low-F#", 4, BOARD_GUITAR);
 	manager.loadSample("./sounds/samples/guitar/006_G1_PM_4.wav", "Low-G", 5, BOARD_GUITAR);
-	manager.loadSample("./sounds/samples/guitar/007_G#1_PM_4.wav", "Low-G#", 6, BOARD_GUITAR);
+	manager.loadSample("./sounds/samples/guitar/007_Gsharp1_PM_4.wav", "Low-G#", 6, BOARD_GUITAR);
 	manager.loadSample("./sounds/samples/guitar/008_A1_PM_4.wav", "Low-A", 7, BOARD_GUITAR);
-	manager.loadSample("./sounds/samples/guitar/009_A#1_PM_4.wav", "Low-A#", 8, BOARD_GUITAR);
+	manager.loadSample("./sounds/samples/guitar/009_Asharp1_PM_4.wav", "Low-A#", 8, BOARD_GUITAR);
 	manager.loadSample("./sounds/samples/guitar/010_B1_PM_4.wav", "Low-B", 9, BOARD_GUITAR);
 	manager.loadSample("./sounds/samples/guitar/011_C1_PM_4.wav", "Low-C", 10, BOARD_GUITAR);
-	manager.loadSample("./sounds/samples/guitar/012_C#1_PM_4.wav", "Low-C#", 11, BOARD_GUITAR);
+	manager.loadSample("./sounds/samples/guitar/012_Csharp1_PM_4.wav", "Low-C#", 11, BOARD_GUITAR);
 	manager.loadSample("./sounds/samples/guitar/013_D2_PM_4.wav", "Hi-D", 12, BOARD_GUITAR);
-	manager.loadSample("./sounds/samples/guitar/014_D#2_PM_4.wav", "Hi-D#", 13, BOARD_GUITAR);
+	manager.loadSample("./sounds/samples/guitar/014_Dsharp2_PM_4.wav", "Hi-D#", 13, BOARD_GUITAR);
 	manager.loadSample("./sounds/samples/guitar/015_E2_PM_4.wav", "Hi-E", 14, BOARD_GUITAR);
 	manager.loadSample("./sounds/samples/guitar/016_F2_PM_4.wav", "Hi-F", 15, BOARD_GUITAR);
 
 	// Piano board
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major C low.wav", "maj-C", 0, BOARD_PIANO);
-	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major C#.wav", "maj-C", 1, BOARD_PIANO);
+	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major Csharp.wav", "maj-C", 1, BOARD_PIANO);
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major D.wav", "maj-D", 2, BOARD_PIANO);
-	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major D#.wav", "maj-D#", 3, BOARD_PIANO);
+	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major Dsharp.wav", "maj-D#", 3, BOARD_PIANO);
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major E.wav", "maj-E", 4, BOARD_PIANO);
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major F.wav", "maj-F", 5, BOARD_PIANO);
-	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major F#.wav", "maj-F#", 6, BOARD_PIANO);
+	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major Fsharp.wav", "maj-F#", 6, BOARD_PIANO);
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major G.wav", "maj-G", 7, BOARD_PIANO);
-	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major G#.wav", "maj-G#", 8, BOARD_PIANO);
+	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major Gsharp.wav", "maj-G#", 8, BOARD_PIANO);
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major A.wav", "maj-A", 9, BOARD_PIANO);
-	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major A#.wav", "maj-A#", 10, BOARD_PIANO);
+	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major Asharp.wav", "maj-A#", 10, BOARD_PIANO);
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major B.wav", "maj-B", 11, BOARD_PIANO);
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - minor chords - Cm higher.wav", "min-Cm", 12, BOARD_PIANO);
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - minor chords - Dm higher.wav", "min-Dm", 13, BOARD_PIANO);
