@@ -118,10 +118,16 @@ img.section-title {
 
 #pads ul li {
 	display: inline;
+	position: relative;
 }
 
-#pads ul li span {
+#pads ul li div {
 	color: black;
+	position: absolute;
+	right: 20px;
+	bottom: -30px;
+	font-weight: bold;
+	font-size: 1.2em;
 }
 
 /* toggle code from: http://jsfiddle.net/davidelrizzo/DYJkG/ */
