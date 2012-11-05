@@ -94,10 +94,18 @@ p {
 	vertical-align: bottom;
 }
 
-#player #player-container
-{
-	margin-left: 18px;
+#player #player-container {
+	text-align: center;
+	margin-top: 7px;
 	padding: 0;
+}
+
+#player-container #player-screen {
+	display: inline-block;
+	width: 166px;
+	height: 33px;
+	margin-left: 15px;
+	background: url('../images/volume-screen.png') no-repeat 0 0;
 }
 
 #header, #left-column > div, #right-column > div {
@@ -189,6 +197,45 @@ img.section-title {
 	position: relative;
 	top: 14px;
 	left: 136px;
+}
+
+/* button CSS adapted from Joe Pettersson: http://www.joepettersson.com/demo/css3-buttons */
+button.slick {
+	font-size: 12px; 
+	text-decoration: none!important; 
+	font-family: Helvetica, Arial, sans serif;
+	padding: 8px 12px; 
+	border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	box-shadow: inset 0px 0px 2px #fff;
+	-o-box-shadow: inset 0px 0px 2px #fff;
+	-webkit-box-shadow: inset 0px 0px 2px #fff;
+	-moz-box-shadow: inset 0px 0px 2px #fff;
+	color: #fff;
+	border: 1px solid #000;
+	background-image: -moz-linear-gradient(#2e2e2e, #323232);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#323232), to(#2e2e2e));
+	background-image: -webkit-linear-gradient(#2e2e2e, #323232);
+	background-image: -o-linear-gradient(#2e2e2e, #323232);
+	text-shadow: 1px 1px 1px #6d6d6d;
+	background-color: #2e2e2e;
+}
+
+button.slick:active {
+	box-shadow: inset 0px 0px 3px #999;
+	-o-box-shadow: inset 0px 0px 3px #999;
+	-webkit-box-shadow: inset 0px 0px 3px #999;
+	-moz-box-shadow: inset 0px 0px 3px #999;
+	border: 2px solid #000;
+}
+
+button.slick:hover {
+	border: 1px solid #000;
+	background-image: -moz-linear-gradient(#323232, #2e2e2e);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2e2e2e), to(#323232));
+	background-image: -webkit-linear-gradient(#323232, #2e2e2e);
+	background-image: -o-linear-gradient(#323232, #2e2e2e);
+	background-color: #323232;
 }
 
 
