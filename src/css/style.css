@@ -219,6 +219,7 @@ button.slick {
 	background-image: -o-linear-gradient(#2e2e2e, #323232);
 	text-shadow: 1px 1px 1px #6d6d6d;
 	background-color: #2e2e2e;
+	cursor: pointer;
 }
 
 button.slick:active {
@@ -237,6 +238,23 @@ button.slick:hover {
 	background-image: -o-linear-gradient(#323232, #2e2e2e);
 	background-color: #323232;
 }
+
+button.slick img.play {
+	content: url('../images/play-symbol.png');
+}
+
+button.slick:hover img.play {
+	content: url('../images/play-symbol-down.png');
+}
+
+button.slick img.stop {
+	content: url('../images/stop-symbol.png');
+}
+
+button.slick:hover img.stop {
+	content: url('../images/stop-symbol-down.png');
+}
+
 
 
 /* button CSS adapted from Chad Mazzola: http://hellohappy.org/css3-buttons/

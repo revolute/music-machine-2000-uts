@@ -145,12 +145,21 @@ function BackingTrackManager () {
 			if (backingSource.playbackState == 2) {
 				//Pause it, it is currently playing
 				backingSource.noteOff(0);
+				// Change button class to play
+				document.getElementById("play-stop").classList.remove("stop");
+				document.getElementById("play-stop").classList.add("play");
 			} else {
 				this.playTrack(backingTracks[activeTrack].getTrack());
 				//loadBackingTrack("./sounds/backing_tracks/Beat04_130BPM(Drums).wav");
+				// Change button class to stop
+				document.getElementById("play-stop").classList.remove("play");
+				document.getElementById("play-stop").classList.add("stop");
 			}
 		} else {
 			this.playTrack(backingTracks[activeTrack].getTrack());
+			// Change button class to stop
+			document.getElementById("play-stop").classList.remove("play");
+			document.getElementById("play-stop").classList.add("stop");
 		}
 	}
 }
