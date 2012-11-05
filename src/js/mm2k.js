@@ -1,16 +1,15 @@
 window.onload = init;
 
 //Setup document-scoped variables
+var manager;
+var activeSoundboard;
 var keyMappings;
-var context;
-var outputNode;
 var source;
 var backingSource;
 var activeTrack;
-var manager;
-var activeSoundboard;
+var context;
 var jsProcessor;
-var gainNode;
+var backingGainNode;
 var samplesLoaded = 0;
 
 //Declare soundboards
@@ -78,7 +77,7 @@ function init() {
 
 //Makes sure the first soundboard is loaded before setting all the names to avoid null pointers.
 function loadInitialNames() {
-    if(samplesLoaded < 30) {//we want it to match
+    if(samplesLoaded < 50) {//we want it to match
         setTimeout(loadInitialNames, 50);//wait 50 millisecnds then recheck
         return;
     }
@@ -272,6 +271,68 @@ function SoundboardManager() {
 	}
 }
 
+function recordingManager() {
+	var events = new Array();
+	var activated = false;
+	var startTime = -1;
+
+	this.startRecording = function(startTime) {
+		//Playback functions check if activated
+		this.activated = true; 
+		this.startTime = startTime; 
+	}
+
+	this.stopRecording = function() {
+		activated = false;
+	}
+
+	this.isActivated = function() {
+		return activated;
+	}
+
+	this.addSoundEvent = function(soundboardID, soundID, time) {
+		events.push(new SoundEvent(soundboardID, soundID, time - startTime))
+	}
+
+	this.addTrackEvent = function(trackID, time) {
+		events.push(new TrackEvent(trackID, time - startTime))
+	}
+
+	function SoundEvent(soundboardID, soundID, time) {
+		this.soundboardID = soundboardID; //0-4
+		this.soundID = soundID; //0-15
+		this.time = time;
+
+		this.getSoundboardID = function() {
+		     return soundboardID;
+		}
+
+		this.getSoundID = function() {
+		     return soundID;
+		}
+
+		this.getTime = function() {
+		     return time;
+		}
+	}
+
+	function TrackEvent(trackID, time) {
+		this.trackID = trackID; //0-4
+		this.time = time;
+
+		this.getTrackID = function() {
+		     return trackID;
+		}
+
+		this.getTime = function() {
+		     return time;
+		}
+	}
+}
+
+function playbackManager() {
+
+}
 
 function KeyMappings() {
 	// Sound pad bindings
