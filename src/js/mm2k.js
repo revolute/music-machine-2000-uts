@@ -11,6 +11,7 @@ var manager;
 var activeSoundboard;
 var jsProcessor;
 var gainNode;
+var samplesLoaded = 0;
 
 //Declare soundboards
 var BOARD_DRUMS = 0;
@@ -58,7 +59,6 @@ function init() {
 
 	//Load the samples up
     loadSounds();
-    //manager.loadSample("./sounds/samples/drums/CYCdh_ElecK04-Clap.wav", "Clap", 0, BOARD_DRUMS);
 	
 	//Set up the intermediary processing node for the visualiser
 	jsProcessor = context.createJavaScriptNode(2048);
@@ -76,7 +76,16 @@ function init() {
     jsProcessor.connect(context.destination);
 	visualizer();
 	keyMappings = new KeyMappings();
-	//setActiveBoard(BOARD_DRUMS);
+	ready();
+}
+
+//Makes sure the first soundboard is loaded before setting all the names to avoid null pointers.
+function ready() {
+    if(samplesLoaded < 30) {//we want it to match
+        setTimeout(ready, 50);//wait 50 millisecnds then recheck
+        return;
+    }
+    setActiveBoard(BOARD_DRUMS);
 }
 
 function setActiveBoard(soundboardID) {
@@ -191,6 +200,7 @@ function SoundboardManager() {
 	    request.responseType = "arraybuffer";
 
 	    request.onload = function() {
+	      samplesLoaded++;
 	      soundToAdd = context.createBuffer(request.response, false);
 		  manager.addSound(name, soundID, soundboardID, soundToAdd);
 	    }

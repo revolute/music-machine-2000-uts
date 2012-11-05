@@ -46,7 +46,7 @@ for (a=0;a<histomax;a++) {
 }
 
 maxvalue = new Array();
-for (a=0;a<1024;a++) {
+for (a=0;a<310;a++) {
 	maxvalue[a] = 0;
 }
 
@@ -84,7 +84,7 @@ function audioAvailable(event) {
 	fft.forward(signal);
 	
 	for ( var i = 0; i < bufferSize/8; i++ ) {
-		magnitude = fft.spectrum[i] * 8000; 					// multiply spectrum by a zoom value
+		magnitude = fft.spectrum[i] * 4000; 					// multiply spectrum by a zoom value
 		
 		currentvalue[i] = magnitude;
 		
