@@ -47,7 +47,7 @@ function loadSounds() {
 	manager.loadSample("./sounds/samples/guitar/016_F2_PM_4.wav", "Hi-F", 15, BOARD_GUITAR);
 
 	// Piano board
-	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major C low.wav", "maj-C&#35;", 0, BOARD_PIANO);
+	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major C low.wav", "maj-C", 0, BOARD_PIANO);
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major C#.wav", "maj-C", 1, BOARD_PIANO);
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major D.wav", "maj-D", 2, BOARD_PIANO);
 	manager.loadSample("./sounds/samples/piano/Grand Piano - Fazioli - major D#.wav", "maj-D#", 3, BOARD_PIANO);

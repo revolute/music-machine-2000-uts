@@ -121,10 +121,7 @@ img.section-title {
 }
 
 #pads ul li span {
-	position: relative;
-	top: 10px;
-	left: 10px;
-	color: yellow;
+	color: black;
 }
 
 /* toggle code from: http://jsfiddle.net/davidelrizzo/DYJkG/ */
