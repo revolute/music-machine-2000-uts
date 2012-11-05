@@ -5,7 +5,7 @@
 	<script src="./js/vis/dsp.js"></script>
 	<script src="./js/mousetrap.js"></script>
 	<script src="./js/mm2k.js"></script>
-	<script src="./js/soundboards.js"></script>
+	<script src="./js/assets.js"></script>
 	<script defer src="./js/vis/visualizer.js"></script>
 </head>
 
@@ -35,11 +35,11 @@
 						</div>
 						<div class="selector-container">
 							<p>Instruments</p>
-							<div><input type="radio" checked name="instruments" id="instruments-1" onclick="setActiveBoard(0);" /><label for="instruments-1">Drums</label><span>6</span></div>
-							<div><input type="radio" name="instruments" id="instruments-2" onclick="setActiveBoard(1);" /><label for="instruments-2">Guitar</label><span>7</span></div>
-							<div><input type="radio" name="instruments" id="instruments-3" onclick="setActiveBoard(2);" /><label for="instruments-3">Piano</label><span>8</span></div>
-							<div><input type="radio" name="instruments" id="instruments-4" onclick="setActiveBoard(3);" /><label for="instruments-4">Trance</label><span>9</span></div>
-							<div><input type="radio" name="instruments" id="instruments-5" onclick="setActiveBoard(4);" /><label for="instruments-5">8-Bit</label><span>0</span></div>	
+							<div><input type="radio" checked name="instruments" id="instruments-1" onclick="manager.setActiveBoard(0);" /><label for="instruments-1">Drums</label><span>6</span></div>
+							<div><input type="radio" name="instruments" id="instruments-2" onclick="manager.setActiveBoard(1);" /><label for="instruments-2">Guitar</label><span>7</span></div>
+							<div><input type="radio" name="instruments" id="instruments-3" onclick="manager.setActiveBoard(2);" /><label for="instruments-3">Piano</label><span>8</span></div>
+							<div><input type="radio" name="instruments" id="instruments-4" onclick="manager.setActiveBoard(3);" /><label for="instruments-4">Trance</label><span>9</span></div>
+							<div><input type="radio" name="instruments" id="instruments-5" onclick="manager.setActiveBoard(4);" /><label for="instruments-5">8-Bit</label><span>0</span></div>	
 						</div>
 					</div>		
 				</div>
@@ -71,7 +71,7 @@
 					<div id="player-container">
 						<button class="slick" id="backing-toggle" onclick="trackManager.toggleBackingTrack();"><img id="play-stop" class="play"></button>
 						<div id="player-screen">
-							<img src="images/volume-icon.png" alt="Volume"><input type="range" min="0" max="100" value="50" id="volume-slider" onchange="changeBackingVolume(this);">
+							<img src="images/volume-icon.png" alt="Volume"><input type="range" min="0" max="100" value="50" id="volume-slider" onchange="trackManager.changeBackingVolume(this);">
 						</div>
 					</div>
 				</div>

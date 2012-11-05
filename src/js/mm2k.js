@@ -41,25 +41,18 @@ function init() {
 
 	//Set up the WebAudio objects
     source = context.createBufferSource();
-	manager = new SoundboardManager();
-	activeSoundboard = BOARD_DRUMS;
-	//activeSoundboard = new Soundboard();
 
+    //Create the managers
+	manager = new SoundboardManager();
 	trackManager = new BackingTrackManager();
-	trackManager.loadTrack("./sounds/backing_tracks/Beat04_130BPM(Drums).wav", 0);
-	trackManager.loadTrack("./sounds/backing_tracks/28(140_BPM).wav", 1);
-	trackManager.loadTrack("./sounds/backing_tracks/35(135_BPM).wav", 2);
-	trackManager.loadTrack("./sounds/backing_tracks/BeatK04 97-03.wav", 3);
-	trackManager.loadTrack("./sounds/backing_tracks/CM139_8Bit_Beat02(120BPM).wav", 4);
-	trackManager.loadTrack("./sounds/backing_tracks/Loop02.wav", 5);
+
+	//Start the samples loading
+    loadSounds();
+
+	//Set the active boards
+	activeSoundboard = BOARD_DRUMS;
 	activeTrack = BACKING_UNICORN;
 
-	//backingSource = context.createBufferSource();
-	//backingSource.loop = true;
-
-	//Load the samples up
-    loadSounds();
-	
 	//Set up the intermediary processing node for the visualiser
 	jsProcessor = context.createJavaScriptNode(2048);
     jsProcessor.onaudioprocess = audioAvailable;
@@ -67,32 +60,29 @@ function init() {
 
 	//Set up the backing track
 	backingGainNode = context.createGainNode();
-	//backingSource.connect(backingGainNode);
 	backingGainNode.connect(jsProcessor);
+
 	// Set the default volume to whatever the default has been set in the HTML
-	changeBackingVolume(document.getElementById('volume-slider'));
+	trackManager.changeBackingVolume(document.getElementById('volume-slider'));
 	
-	//Connect everything up
+	//Connect the visualiser everything up
     jsProcessor.connect(context.destination);
 	visualizer();
+
+	//Enable the key mappings
 	keyMappings = new KeyMappings();
-	ready();
+
+	//
+	loadInitialNames();
 }
 
 //Makes sure the first soundboard is loaded before setting all the names to avoid null pointers.
-function ready() {
+function loadInitialNames() {
     if(samplesLoaded < 30) {//we want it to match
-        setTimeout(ready, 50);//wait 50 millisecnds then recheck
+        setTimeout(loadInitialNames, 50);//wait 50 millisecnds then recheck
         return;
     }
-    setActiveBoard(BOARD_DRUMS);
-}
-
-function setActiveBoard(soundboardID) {
-	activeSoundboard = soundboardID;
-	for (var i = 1; i <= 16; i++) {
-		document.getElementById('pad-' + i).innerHTML = manager.getSound(soundboardID, i - 1).getName();
-	};
+    manager.setActiveBoard(BOARD_DRUMS);
 }
 
 function BackingTrackManager () {
@@ -173,6 +163,12 @@ function BackingTrackManager () {
 			document.getElementById("play-stop").classList.add("stop");
 		}
 	}
+
+	this.changeBackingVolume = function(volumeSlider) {
+		var volume = volumeSlider.value;
+		var fraction = parseInt(volume) / parseInt(volumeSlider.max);
+		backingGainNode.gain.value = fraction * fraction;
+	}
 }
 
 function SoundboardManager() {
@@ -223,6 +219,13 @@ function SoundboardManager() {
 		}
 	}
 
+	this.setActiveBoard = function(soundboardID) {
+		activeSoundboard = soundboardID;
+		for (var i = 1; i <= 16; i++) {
+			document.getElementById('pad-' + i).innerHTML = manager.getSound(soundboardID, i - 1).getName();
+		};
+	}
+
 	function Soundboard(soundboardID) {
 		this.soundboardID = soundboardID;
 
@@ -269,12 +272,6 @@ function SoundboardManager() {
 	}
 }
 
-//MOVE THIS TO BACKINGTRACK
-function changeBackingVolume(volumeSlider) {
-	var volume = volumeSlider.value;
-	var fraction = parseInt(volume) / parseInt(volumeSlider.max);
-	backingGainNode.gain.value = fraction * fraction;
-}
 
 function KeyMappings() {
 	// Sound pad bindings

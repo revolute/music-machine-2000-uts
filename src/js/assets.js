@@ -99,4 +99,12 @@ function loadSounds() {
 	manager.loadSample("./sounds/samples/8bit/CM139_FX53.wav", "Blaster", 13, BOARD_8BIT);
 	manager.loadSample("./sounds/samples/8bit/CM139_FX56.wav", "Level-Up", 14, BOARD_8BIT);
 	manager.loadSample("./sounds/samples/8bit/CM139_FX62.wav", "Hi-Score", 15, BOARD_8BIT);
+
+	// Backing Tracks
+	trackManager.loadTrack("./sounds/backing_tracks/Beat04_130BPM(Drums).wav", 0);
+	trackManager.loadTrack("./sounds/backing_tracks/28(140_BPM).wav", 1);
+	trackManager.loadTrack("./sounds/backing_tracks/35(135_BPM).wav", 2);
+	trackManager.loadTrack("./sounds/backing_tracks/BeatK04 97-03.wav", 3);
+	trackManager.loadTrack("./sounds/backing_tracks/CM139_8Bit_Beat02(120BPM).wav", 4);
+	trackManager.loadTrack("./sounds/backing_tracks/Loop02.wav", 5);
 }
